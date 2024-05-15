@@ -47,9 +47,7 @@ def find_extra_lines(file1, file2):
             lines1 = set(' '.join(line.split()) for line in f1.readlines())
         with open(file2, 'r', encoding='utf-8') as f2:
             lines2 = [' '.join(line.split()) for line in f2.readlines()]
-
         extra_lines = [line for line in lines2 if line not in lines1]
-
         if extra_lines:
             for line in extra_lines:
                 print(line)
@@ -68,7 +66,4 @@ def main_loop():
         find_extra_lines(FILENAME_OLD, FILENAME_NEW)
 
 if __name__ == "__main__":
-    """
     main_loop()
-    """
-    find_extra_lines(FILENAME_OLD, FILENAME_NEW)
