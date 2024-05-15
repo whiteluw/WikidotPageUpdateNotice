@@ -29,7 +29,7 @@ def saomiao(filename):
             with open(filename, 'a', encoding='utf-8') as file:
                 for item in items:
                     link_element = item.find_element(By.TAG_NAME, 'a')
-                    link = link_element.getAttribute('href')
+                    link = link_element.get_attribute('href')
                     p_text = item.find_element(By.TAG_NAME, 'p').text
                     parts = p_text.split('\n')
                     page_name = parts[0]
@@ -44,13 +44,15 @@ def saomiao(filename):
 def find_extra_lines(file1, file2):
     try:
         with open(file1, 'r', encoding='utf-8') as f1:
-            lines1 = set(f1.readlines())
+            lines1 = set(' '.join(line.split()) for line in f1.readlines())
         with open(file2, 'r', encoding='utf-8') as f2:
-            lines2 = set(f2.readlines())
-        extra_lines = lines2 - lines1
+            lines2 = [' '.join(line.split()) for line in f2.readlines()]
+
+        extra_lines = [line for line in lines2 if line not in lines1]
+
         if extra_lines:
             for line in extra_lines:
-                print(line.strip())
+                print(line)
         else:
             print("无更新")
     except FileNotFoundError as e:
@@ -64,8 +66,9 @@ def main_loop():
         saomiao(FILENAME_NEW)
         print("开始对比")
         find_extra_lines(FILENAME_OLD, FILENAME_NEW)
-        print(f"等待{DELAY}秒后再次扫描...")
-        time.sleep(DELAY)
 
 if __name__ == "__main__":
+    """
     main_loop()
+    """
+    find_extra_lines(FILENAME_OLD, FILENAME_NEW)
