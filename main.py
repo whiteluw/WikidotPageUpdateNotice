@@ -11,8 +11,8 @@ CHROME_OPTIONS.add_argument("--disable-images")
 PREFS = {"profile.managed_default_content_settings.images": 2}
 CHROME_OPTIONS.add_experimental_option("prefs", PREFS)
 
-URL = 'https://scpsandboxcn.wikidot.com/pagelisttest'
-DELAY = 120
+URL = 'https://scpsandboxcn.wikidot.com/pagelisttest' #检测的Listpage页面
+DELAY = 120 #检测间隔时间
 FILENAME_OLD = "data.txt"
 FILENAME_NEW = "newdata.txt"
 
